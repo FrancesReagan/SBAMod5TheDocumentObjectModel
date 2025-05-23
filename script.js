@@ -34,3 +34,24 @@ function loadPostsFromStorage() {
   }
 }
 
+//save posts to localStorage//
+function savePostsToStorage() {
+  try  {
+    localStorage.setItem("blogPosts", JSON.stringify(posts));
+  } catch (error) {
+    console.error("Error saving posts to localStorage:", error);
+  }
+}
+
+//generate a unique ID for posts//
+function generateId() {
+  return Date.now().toString() + Math.random().toString(36).substring(2);
+}
+
+//format timestamp for display//
+function formatTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  return date.toLocaleDateString() + "at" + date.toLocaleTimeString();
+}
+
+//clear error messages//
