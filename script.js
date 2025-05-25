@@ -75,7 +75,7 @@ function validateForm() {
     isValid = false;
   }
 
-  If (!content) {
+  if (!content) {
     contentError.textContent = "Post content is required";
     isValid = false;
   }
@@ -161,7 +161,7 @@ function renderPosts() {
   }
 
   posts.forEach(post => {
-    const postElement =createPostElement(post);
+    const postElement = createPostElement(post);
     postsContainer.appendChild(postElement);
   });
 }
@@ -247,7 +247,7 @@ function getAllPosts() {
 //utility function to clear all posts (for debuggin/testing)//
 function clearAllPosts() {
   if(confirm("Are you sure you want to delete ALL posts? This cannot be undone.")) {
-    post = [];
+    posts = [];
     savePostsToStorage();
     renderPosts();
     cancelEdit();
@@ -259,3 +259,7 @@ window.blogUtils = {
   getAllPosts,
   clearAllPosts,
 };
+
+// make edit and delete functions available globally for onclick handlers//
+window.editPost = editPost;
+window.deletePost = deletePost;
