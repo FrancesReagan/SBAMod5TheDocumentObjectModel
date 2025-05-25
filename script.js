@@ -142,3 +142,44 @@ function clearForm() {
   clearErrors();
 }
 
+//cancel editing mode//
+function cancelEditBtn() {
+  currentEditingId = null;
+  submitBtn.textContent = "Add Post";
+  cancelEditBtn.style.display="none";
+  clearForm();
+}
+
+//render all posts//
+function renderPosts() {
+  postsContainer.innerHTML = "";
+
+  if (posts.length === 0) {
+    postsContainer.innerHTML = '<div class ="empty-state">No Posts Yet. Create your first post above</div>';
+    return;
+  }
+
+  posts.forEach(post => {
+    const postElement =createPostElement(post);
+    postsContainer.appendChild(postElement);
+  });
+}
+
+//create HTML element for single post//
+funcion createPostElement(post) {
+  const postDiv = document.createElement("div");
+  postDiv.className = "post";
+  postDiv.setAttribute("data-id", post.id);
+
+  postDiv.innerHTML = `
+     <div class="post-header">
+     <h3 class="post-title">${escapeHtml(post.title)}</h3>
+     <span class="post-timestamp">${formatTimestamp(post.timestamp)}</span>
+     </div>
+     <div class="post-content">${escapeHtml(post.content)}</div>
+     <div class="post-actions">
+     <button classs="edit-btn" onclick="editPost('${post.id}')">Edit</button>
+     <button class="delete-btn" onclick="deletePost('${post.id}')">Delete</button>
+     </div>
+     `;
+     
