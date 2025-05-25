@@ -226,3 +226,34 @@ function deletePost(id) {
 
   //remove post from aray//
   posts=posts.filter(post => post.id!==id);
+  
+  //if editing this post, cancel editing//
+  if(currentEditingId===id) {
+    cancelEdi();
+  }
+
+  //save and re-render//
+  savePostsToStorage();
+  renderPosts();
+}
+
+//utility function to get posts (for debugging)//
+function getAllPosts() {
+  return posts;
+}
+
+//utility function to clear all posts (for debuggin/testing)//
+function clearAllPosts() {
+  if(confirm("Are you sure you want to delete ALL posts? This cannot be undone.")) {
+    post = [];
+    savePostsToStorage();
+    renderPosts();
+    cancelEdit();
+  }
+}
+
+//add this to global scope for debugging//
+window.blogUtils = {
+  getAllPosts,
+  clearAllPosts,
+};
