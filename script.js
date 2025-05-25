@@ -1,4 +1,3 @@
-//using take 2//
 //global variables to manage state//
 let posts=[];
 let currentEditingId=null;
