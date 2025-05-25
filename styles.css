@@ -120,4 +120,56 @@ button {
 
 }
 
+/* error message styling */
+.error-messge {
+  display:block;
+  color:#dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+/* posts section styling */
+.posts-section h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#posts-container {
+  display:flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+/* individual post styling */
+.post {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: box-shadow 0.3s;
+}
+
+.post:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.post-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  margin: 0;
+  flex-grow: 1;
+  margin-right: 15px;
+  
+}
 
