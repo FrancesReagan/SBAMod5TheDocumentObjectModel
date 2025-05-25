@@ -106,3 +106,39 @@ clearForm();
 renderPosts();
 }
 
+//create new post//
+function createNewPost(title, content) {
+  const newPost = {
+    id:generateId(),
+    title:title,
+    content:content,
+    timestamp:Date.now(),
+  };
+
+  posts.unshift(newPost); //add to the beginning of the array//
+  savePostsToStorage();
+}
+
+//update existing post//
+function updatePost(id, title, content) {
+  const postIndex = posts.findIndex(post => post.id === id);
+  if (postIndex !== -1) {
+    posts[postIndex].title = title;
+    posts[postIndex].content = content;
+    posts[postIndex].timestamp = Date.now(); //update timestamp//
+    savePostsToStorage();
+  }
+
+  //reset editing state//
+  currentEditingId = null;
+  submitBtn.textContent = "Add Post";
+  cancelEditBtn.style.display = "none";
+}
+
+//clear the form//
+function clearForm() {
+  titleInput.value = "";
+  contentInput.value = "";
+  clearErrors();
+}
+
