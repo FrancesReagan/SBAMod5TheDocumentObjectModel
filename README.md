@@ -1,5 +1,7 @@
 Interactive Personal Blog Platform:
 A simple, client-side blog platform built with HTML, CSS, and JavaScript that allows users to create, edit, delete, and manage blog posts directly in their browser.
+<img width="1268" alt="image" src="https://github.com/user-attachments/assets/90f63d40-6cd2-44de-8ee0-4d61e6b86bc2" />
+
 
 Features:
 *Create new posts: add blog posts with title and content.
