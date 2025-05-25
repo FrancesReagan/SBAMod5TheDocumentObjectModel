@@ -182,4 +182,47 @@ funcion createPostElement(post) {
      <button class="delete-btn" onclick="deletePost('${post.id}')">Delete</button>
      </div>
      `;
-     
+     return postDiv;
+}
+
+//escape HTML to prevent XSS attacks//
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+//edit a post//
+function editPost(id) {
+  const post = posts.find(post => post.id === id);
+  if (!post) {
+    console.error("Post not found:", id);
+    return;
+  }
+
+  //populate form with post data//
+  titleInput.value = post.title;
+  contentInput.value = post.content;
+
+  //set editing mode//
+  currentEditingId = id;
+  submitBtn.textContent = "Update Post";
+  cancelEditBtn.style.display = "inline-block";
+  
+
+  //scroll to form//
+  postForm.scrollIntoView({behavior: "smooth"});
+
+  //focus on title input//
+  titleInput.focus();
+}
+
+//delete a post//
+function deletePost(id) {
+  //ask for confirmation//
+  if(!confirm("Are you sure you want to delete this post? This action cannot be undone.")) {
+    return;
+  }
+
+  //remove post from aray//
+  posts=posts.filter(post => post.id!==id);
