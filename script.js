@@ -7,7 +7,8 @@ let currentEditingId=null;
 const postForm = document.getElementById("post-form");
 const titleInput = document.getElementById("post-title");
 const contentInput = document.getElementById("post-content");
-const titleerror = document.getElementById("content-error");
+const titleError = document.getElementById("title-error");
+const contentError = document.getElementById("content-error");
 const submitBtn = document.getElementById("submit-btn");
 const cancelEditBtn = document.getElementById("cancel-edit");
 const postsContainer = document.getElementById("posts-container");
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
   loadPostsFromStorage();
   renderPosts();
 //add event listeners//
-postForm.addEventListener("submit", handleFormSumit);
+postForm.addEventListener("submit", handleFormSubmit);
 cancelEditBtn.addEventListener("click", cancelEdit);
   
 });
@@ -52,7 +53,7 @@ function generateId() {
 //format timestamp for display//
 function formatTimestamp(timestamp) {
   const date = new Date(timestamp);
-  return date.toLocaleDateString() + "at" + date.toLocaleTimeString();
+  return date.toLocaleDateString() + " at " + date.toLocaleTimeString();
 }
 
 //clear error messages//
@@ -64,7 +65,7 @@ function clearErrors(){
 //Validate form inputs//
 function validateForm() {
   clearErrors();
-  let isValid: true;
+  let isValid = true;
   
   const title = titleInput.value.trim();
   const content = contentInput.value.trim();
@@ -84,14 +85,14 @@ function validateForm() {
 }
 
 //form submission handling (create and edit)//
-function handleFormSumit(event){
+function handleFormSubmit(event){
   event.preventDefault();
 
   if(!validateForm()) {
     return;
 }
 const title = titleInput.value.trim();
-const content = contentInputInput.value.trim();
+const content = contentInput.value.trim();
 
 if (currentEditingId) {
   //update existing post//
@@ -143,7 +144,7 @@ function clearForm() {
 }
 
 //cancel editing mode//
-function cancelEditBtn() {
+function cancelEdit() {
   currentEditingId = null;
   submitBtn.textContent = "Add Post";
   cancelEditBtn.style.display="none";
@@ -166,22 +167,23 @@ function renderPosts() {
 }
 
 //create HTML element for single post//
-funcion createPostElement(post) {
+function createPostElement(post) {
   const postDiv = document.createElement("div");
   postDiv.className = "post";
   postDiv.setAttribute("data-id", post.id);
 
   postDiv.innerHTML = `
      <div class="post-header">
-     <h3 class="post-title">${escapeHtml(post.title)}</h3>
-     <span class="post-timestamp">${formatTimestamp(post.timestamp)}</span>
+      <h3 class="post-title">${escapeHtml(post.title)}</h3>
+      <span class="post-timestamp">${formatTimestamp(post.timestamp)}</span>
      </div>
-     <div class="post-content">${escapeHtml(post.content)}</div>
-     <div class="post-actions">
-     <button classs="edit-btn" onclick="editPost('${post.id}')">Edit</button>
-     <button class="delete-btn" onclick="deletePost('${post.id}')">Delete</button>
+      <div class="post-content">${escapeHtml(post.content)}</div>
+      <div class="post-actions">
+      <button class="edit-btn" onclick="editPost('${post.id}')">Edit</button>
+      <button class="delete-btn" onclick="deletePost('${post.id}')">Delete</button>
      </div>
      `;
+
      return postDiv;
 }
 
@@ -229,7 +231,7 @@ function deletePost(id) {
   
   //if editing this post, cancel editing//
   if(currentEditingId===id) {
-    cancelEdi();
+    cancelEdit();
   }
 
   //save and re-render//
