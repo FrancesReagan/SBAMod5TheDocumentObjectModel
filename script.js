@@ -1,3 +1,4 @@
+//using take 2//
 //global variables to manage state//
 let posts=[];
 let currentEditingId=null;
@@ -55,3 +56,53 @@ function formatTimestamp(timestamp) {
 }
 
 //clear error messages//
+function clearErrors(){
+  titleError.textContent = "";
+  contentError.textContent = "";
+}
+
+//Validate form inputs//
+function validateForm() {
+  clearErrors();
+  let isValid: true;
+  
+  const title = titleInput.value.trim();
+  const content = contentInput.value.trim();
+  
+  if(!title) {
+    titleError.textContent = "Post title is required";
+    isValid = false;
+  }
+
+  If (!content) {
+    contentError.textContent = "Post content is required";
+    isValid = false;
+  }
+
+  return isValid;
+
+}
+
+//form submission handling (create and edit)//
+function handleFormSumit(event){
+  event.preventDefault();
+
+  if(!validateForm()) {
+    return;
+}
+const title = titleInput.value.trim();
+const content = contentInputInput.value.trim();
+
+if (currentEditingId) {
+  //update existing post//
+  updatePost(currentEditingId, title, content);
+} else {
+  //create new post//
+  createNewPost(title, content);
+}
+
+//clear form and reset state//
+clearForm();
+renderPosts();
+}
+
